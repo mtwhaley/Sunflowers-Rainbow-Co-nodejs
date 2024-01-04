@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            Sunflowers & Rainbow Co
+        </title>
+        <link rel="stylesheet" href="../StyleSheets/style1.css">
+        <link rel="stylesheet" href="../StyleSheets/Header.css">
+        <link rel="stylesheet" href="../StyleSheets/Nav.css">
+        <link rel="stylesheet" href="../StyleSheets/Cards.css">
+        <link rel="stylesheet" href="../StyleSheets/ShoppingCart.css">
+        <link rel="stylesheet" href="../StyleSheets/Forms.css">
+    </head>
+    <body style="padding-bottom: 70px;">
+
+        <div id="header">
+            <img src="../Images/Header Image.png" id="headerImage" alt="Sunflower & Rainbow Cover Photo">
+            <p id="businessName"> S u n f l o w e r &nbsp; & &nbsp; R a i n b o w &nbsp; c o </p>
+        </div>
+
+
+        <div id="cartTable" class="Flexbox" style="justify-content: space-around;">
+            <div id="cartItems">
+                <p id="cartTitle">My Cart:</p><hr>
+            </div>
+            <div id="payment" style="display: flex; flex-direction: column;">
+                <div id="contactInfo">
+                    <form action="http://localhost:3000/purchase" method="post" style="position: relative;" id="shippingForm">
+                        <p style="font-weight: bold; font-size: 2.5vh;">Shipping Information:</p>
+                        <hr><br>
+                        <label for="fullname">Full Name: </label><br>
+                        <input type="text" id="fullname" name="fullname">
+                        <br><br>
+                        <label for="address">Address: </label><br>
+                        <input type="text" id="address" name="address">
+                        <br><br>
+                        <label for="city">City: </label><br>
+                        <input type="text" id="city" name="city">
+                        <br><br>
+                        <label for="state">State: </label>
+                        <label for="zip" style="position: absolute;left: 50%;">Zipcode: </label>
+                        <br>
+                        <input type="text" id="state" name="state" style="width: 40%;">
+                        &nbsp;&nbsp;
+                        <input type="text" name="zip" id="zip" style="position: absolute; width: 40%; left: 50%;">
+                        <br><br><br>
+                        <input type="hidden" name="cost" id="cost">
+                        <input type="hidden" name="order" id="order">
+                        
+                        
+                    </form>
+                </div>
+                <div id="submitDiv" style="text-align: center;">
+                    <button id="toCheckout" value="Continue to checkout" onclick="purchaseClicked();" style="width: 50%">Continue to checkout</button>
+                </div>
+
+            </div>
+            
+        </div>
+        <div id="paymentMessage" style="display: none; text-align: center;">
+            <p id="paymentStatus" style="font-size: 5vh; font-weight: bold;"></p>
+        </div>
+        
+
+        
+
+        <div id="navSpace"></div>
+        
+        <script src="https://checkout.stripe.com/checkout.js" defer></script>
+        <script src="../ScriptSheets/Payment.js" defer></script>
+        <script src="../ScriptSheets/General.js"></script>
+        <script src="../ScriptSheets/ShoppingCart.js"></script>
+        
+        <script src="../ScriptSheets/Nav.js"></script>
+        <script src="../ScriptSheets/Transaction.js"></script>
+        <script>
+
+            const shippingCost= Number("<%=shipFee%>")
+            const taxRate=Number("<%=taxRate%>")
+            
+            setNavigation("ShoppingCart")
+            loadCartDisplay()
+            document.getElementById("bottomNav").style.position="fixed"
+            document.getElementById("bottomNav").style.bottom="0"
+
+            function MobileChanges(x) {
+                if (x.matches) {
+                    const allRemoveButtons=document.getElementsByClassName("remove")
+                    for (var i=0;i<allRemoveButtons.length;i++) {
+                        allRemoveButtons[i].innerHTML="Remove"
+                    } 
+                }
+            }
+
+            var stripePublicKey='<%= pubKey %>'
+            var stripeHandler
+
+            async function setStripeVar() {
+                stripeHandler=await StripeCheckout.configure({
+                    key:stripePublicKey,
+                    locale: 'en',
+                    token: function(token) {
+                        const items=getJSONCartItems()
+                        const shippingLine3=document.getElementById("city").value+", "+document.getElementById("state").value+" "+document.getElementById("zip").value
+
+                        fetch('/purchase', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'accept':'application/json'
+                            },
+                            body: JSON.stringify({
+                                stripeTokenId: token.id,
+                                items: items,
+                                shippingInfo: {
+                                    ShippingLine1: document.getElementById("fullname").value,
+                                    ShippingLine2: document.getElementById("address").value,
+                                    ShippingLine3: shippingLine3
+                                }
+
+                            })
+                        }).then(function(res) {
+                            return res.json()
+                        }).then(function(data) {
+                            ConvertCartToMessage(data.message)
+                            emptyCart()
+                        }).catch(function(error) {
+                            console.error(error)
+                        })
+                    }
+                })
+            }
+
+            function purchaseClicked() {
+                const total=Number(document.getElementById("totalAmount").innerHTML) * 100
+
+
+                stripeHandler.open({
+                    amount: total
+                })
+                const items=getJSONCartItems()
+                
+                
+            }
+
+            document.addEventListener("DOMContentLoaded", function(e) {
+                var x=window.matchMedia("(max-width: 1024px)")
+                MobileChanges(x)
+
+                setStripeVar()
+            })
+            
+            
+            
+        </script>
+    </body>
+</html>

@@ -1,0 +1,84 @@
+/*
+* Prefixed by https://autoprefixer.github.io
+* PostCSS: v8.4.14,
+* Autoprefixer: v10.4.7
+* Browsers: last 4 version
+*/
+
+.categoryName {
+    display: block;
+    font-size: calc(2.4vh - 2px);
+    height: calc(7vh - 11px);
+    width: calc(6vh + 320px);
+    max-width: calc(36vw - 20px);
+    background-color: white;
+    border: 0.25vh solid black;
+
+    
+}
+.categoryName:hover {
+    background-color: var(--fadedButtonColor);
+}
+
+#categoryText {
+    margin: 10px;
+    font-weight: bold;
+    font-size: calc(2.5vh + 2px);
+    width: 100%;
+}
+
+#categorySpace {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    margin-top: 20px;
+    background-color: var(--categoryColor);
+    width: calc(6vh + 360px);
+    max-width: 36vw;
+    height: auto;
+    vertical-align: top;
+    border-width: 0.25vh 0.15vh;
+    border-color: black;
+    border-style: solid;
+    border-radius: 5px;
+
+}
+
+#mobileCategoryDiv {
+    display: none;
+}
+
+
+@media (max-width: 1024px) {
+    #categoryCell {
+        display: none;
+    }
+    #productSpace {
+        justify-content: center;
+    }
+    #mobileCategoryDiv {
+        width: calc(100% - 0.6vh);
+        display: flex;
+        margin-top: 4vh;
+        flex-wrap: wrap;
+        justify-content: center;
+        border: 0.3vh solid black;
+        background: radial-gradient(var(--categoryColor), var(--categoryColor), #af58ed );
+        background-color: var(--categoryColor);
+    }
+    #mobileCategoryDiv button {
+        margin: 0 2vh 2vh 2vh;
+        height: 8vh;
+        width: 12vh;
+        font-size: 2vh;
+        font-weight: bold;
+        border-radius: 50%;
+
+    }
+    #mobileCategoryText {
+        font-weight: bold;
+        font-size: 4vh;
+        margin: 0 0 2vh 0;
+
+    }
+}

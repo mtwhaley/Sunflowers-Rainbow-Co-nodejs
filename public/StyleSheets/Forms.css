@@ -1,0 +1,25 @@
+form {
+    font-size: 2.5vh;
+    margin: 20px;
+    text-align: left;
+    padding: 20px;
+    padding-top: 0;
+}
+input {
+    font-size: 2.5vh;
+    width: 100%;
+    padding: 5px;
+    border-radius: 5px;
+    border-width: 0;
+}
+#toCheckout {
+    margin: 0;
+    width: 100%;
+    background-color: #383838;
+    color: white;
+    padding: 10px;
+
+}
+#toCheckout:hover {
+    background-color: #6b6b6b;
+}

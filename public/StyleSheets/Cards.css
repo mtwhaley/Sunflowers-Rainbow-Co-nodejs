@@ -1,0 +1,78 @@
+
+.productname {
+    font-size: calc(5px + 2vh);
+    font-weight: bold;
+}
+.productimage {
+    left: 0;
+    top: 0;
+    border: calc(0.1vh + 1px) solid black;
+    width: calc(28vh - 20px);
+    height: calc(28vh - 20px);
+    margin-left: 0;
+    border-radius: 5px;
+
+}
+
+.cardstock {
+    position: relative;
+    text-align: center;
+    width: 28vh;
+    min-width: 250px;
+    height: calc(48vh - 10px); /*width + name font size + price font size + addbutton height + margins*/
+    
+    border: calc(0.1vh + 1px) solid black;
+    padding: 1vh;
+    margin: 0 0 0 20px;
+    background-image: linear-gradient(to bottom right, white, var(--buttonColor), var(--cardColor), white); 
+    background-color: var(--cardColor);
+    border-radius: 5px;
+    -webkit-box-shadow: 0.25vh 0.25vh 0.25vh black;
+            box-shadow: 0.25vh 0.25vh 0.25vh black;
+
+    font-size: calc(3px + 2vh);
+}
+
+
+
+.addButton {
+    position: absolute;
+    height: 6vh;
+    width: 6vh;
+
+    background-color: var(--buttonColor);
+    border-radius: 100%;
+    border: 0.2vh solid black;
+    text-align: center;
+    vertical-align: center;
+    color: black;
+    font-size: 3vh;
+    font-weight: bold;
+    padding: auto;
+    right: 10px;
+    bottom: 10px;
+
+
+}
+
+.addButton:hover {
+    background-color: var(--fadedButtonColor);
+}
+
+.checkButton {
+    position: absolute;
+    height: 6vh;
+    width: 6vh;
+    background-color: #6aff00;
+    border-radius: 100%;
+    border: 0.2vh solid black;
+    text-align: center;
+    vertical-align: center;
+    color: black;
+    font-size: calc(3.5vh + 5px);
+    font-weight: bold;
+    padding: auto;
+    right: 10px;
+    bottom: 10px;
+}
+

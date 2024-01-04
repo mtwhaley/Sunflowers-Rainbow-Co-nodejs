@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            Sunflowers & Rainbow Co
+        </title>
+        <link rel="stylesheet" href="StyleSheets/style1.css">
+        <link rel="stylesheet" href="StyleSheets/Header.css">
+        <link rel="stylesheet" href="StyleSheets/Category.css">
+        <link rel="stylesheet" href="StyleSheets/Cards.css">
+        <link rel="stylesheet" href="StyleSheets/Nav.css">
+        
+    </head>
+    <body id="bodyTag">
+        <div id="header">
+            <img src="../Images/Header Image.png" id="headerImage" alt="Sunflower & Rainbow Cover Photo">
+
+            <p id="businessName"> S u n f l o w e r &nbsp; & &nbsp; R a i n b o w &nbsp; c o </p>
+        </div>
+        <div id="mobileCategoryDiv">
+            <div style="width: 100%; text-align: center;">
+                <p id="mobileCategoryText">Shop Categories</p>
+            </div>
+            <button class="categoryName" id="mDecor" onclick="filterCategories('Decor')">Decor</button>
+            <button class="categoryName" id="mStuffed" onclick="filterCategories('Stuffed')">Stuffed Animals</button>
+            <button class="categoryName" id="mApparel" onclick="filterCategories('Apparel')">Apparel</button>
+            <button class="categoryName" id="mSeasonal" onclick="filterCategories('Seasonal')">Seasonal</button>
+            <button class="categoryName" id="mThemed" onclick="filterCategories('Themed')">Themed</button>
+            <button class="categoryName" id="mSlime" onclick="filterCategories('Slime')">Slime</button>
+            <button class="categoryName" id="mMisc" onclick="filterCategories('Misc')">Misc</button>
+            <button class="categoryName" id="mAll" onclick="filterCategories()" style="background-color: var(--buttonColor)">All</button>
+                            
+        </div>
+        <table style="width: 100%; height: auto;">
+            <tr>
+                <td style="width: 20vw; vertical-align: top; min-width: 150px;" id="categoryCell">
+                    <div id="categorySpace">
+                        <p id="categoryText">
+                            Shop Categories
+                            <br><br>
+                            <button class="categoryName" id="Decor" onclick="filterCategories('Decor')">Decor</button><br><br>
+                            <button class="categoryName" id="Stuffed" onclick="filterCategories('Stuffed')">Stuffed Animals</button><br><br>
+                            <button class="categoryName" id="Apparel" onclick="filterCategories('Apparel')">Apparel</button><br><br>
+                            <button class="categoryName" id="Seasonal" onclick="filterCategories('Seasonal')">Seasonal</button><br><br>
+                            <button class="categoryName" id="Themed" onclick="filterCategories('Themed')">Themed</button><br><br>
+                            <button class="categoryName" id="Slime" onclick="filterCategories('Slime')">Slime</button><br><br>
+                            <button class="categoryName" id="Misc" onclick="filterCategories('Misc')">Miscellaneous</button><br><br>
+                            <button class="categoryName" id="All" onclick="filterCategories()" style="background-color: var(--buttonColor)">All</button><br><br>
+                            
+                            
+                        </p>
+                    </div>
+                </td>
+                <td style="vertical-align: top;">
+                    <div id="productSpace" class="FlexBox"></div>
+                </td>
+            </tr>
+        </table>
+        <div style="height: calc(5vh + 40px);"></div>
+        <div id="navSpace">
+
+        </div>    
+
+    </body>
+    <script src="ScriptSheets/Products.js"></script>
+    
+    <script src="ScriptSheets/ShoppingCart.js"></script>
+    <script src="ScriptSheets/Cards.js"></script>
+    <script src="ScriptSheets/Category.js"></script>
+    <script src="ScriptSheets/General.js"></script>
+    <script src="ScriptSheets/Nav.js"></script>
+    <script>
+        setNavigation("Shop")
+        document.getElementById("bottomNav").style.position="fixed"
+        document.getElementById("bottomNav").style.bottom="0"
+    </script>
+    
+    
+</html>

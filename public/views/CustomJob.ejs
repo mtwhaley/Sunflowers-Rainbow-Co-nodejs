@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>
+            Sunflowers & Rainbow Co
+        </title>
+        <link rel="stylesheet" href="../StyleSheets/style1.css">
+        <link rel="stylesheet" href="../StyleSheets/Header.css">
+        <link rel="stylesheet" href="../StyleSheets/Nav.css">
+        <link rel="stylesheet" href="../StyleSheets/Customs.css">
+    </head>
+    <body>
+        <div id="header">
+            <img src="../Images/Header Image.png" id="headerImage" alt="Sunflower & Rainbow Cover Photo">
+            <p id="businessName"> S u n f l o w e r &nbsp; & &nbsp; R a i n b o w &nbsp; c o </p>
+        </div>
+
+        <div id="jobFormDiv">
+            <p style="margin-top: 0; font-size: 3vh; font-weight: bold;">CUSTOM JOBS</p>
+            <hr><br>
+            <form onsubmit="return validateForm()" action="https://docs.google.com/forms/u/0/d/e/1FAIpQLSe1efJqasMKhrFfntPqVUhHT7imhRNBTJI81FLCV0XFjOu1uQ/formResponse" method="post">
+                <div id="centeringForm">
+                    <label for="entry.307685616">First Name: </label><br>
+                    <input type="text" name="entry.307685616" required><br><br>
+
+                    <label for="entry.150634824">Last Name: </label><br>
+                    <input type="text" name="entry.150634824" required><br><br>
+
+                    <label for="entry.497333797">Phone Number: </label><br>
+                    <input type="tel" name="entry.497333797" id="ph"  onchange="formatPhoneNumber()" required><br><br>
+
+                    <label for="entry.1919982919">Email Address:</label><br>
+                    <input type="email" id="em" name="entry.1919982919" required><br><br>
+
+                    <label for="entry.425402346">Job Description:</label><br>
+                    <textarea name="entry.425402346" maxlength="300" required></textarea><br><br>
+
+                    <label for="entry.1230415659">Requested Color(s):</label><br>
+                    <input type="text" name="entry.1230415659" required><br><br>
+                </div>
+                <input type="submit">
+            </form>
+        </div>
+        <div style="height: 60px;"></div>
+        <div id="navSpace"></div>
+
+    </body>
+    <script src="../ScriptSheets/ShoppingCart.js"></script>
+    <script src="../ScriptSheets/Nav.js"></script>
+    <script>
+        setNavigation("Custom Order")
+        document.getElementById("bottomNav").style.position="fixed"
+        document.getElementById("bottomNav").style.bottom="0"
+
+        function validateForm() {
+
+            if (!validatePhone()) {
+                document.getElementById("ph").focus()
+                return false
+            }
+            
+            if (!validateEmail()) {
+                document.getElementById("em").focus()
+                return false
+            }
+            
+        }
+        function validatePhone() {
+            const ph=document.getElementById("ph")
+            let initial=ph.value
+            let numbersOnly=""
+            for(var i=0;i<initial.length;i++) {
+                if (!isNaN(Number(initial[i]))) {
+                    numbersOnly+=initial[i]
+                }
+            }
+            if (numbersOnly.length!=10) {
+                alert("Please enter a valid phone number (including area code)")
+                return false
+            }
+            return true
+        }
+        function validateEmail() {
+            const email=document.getElementById("em").value
+            const i1=email.indexOf("@")
+            console.log(i1)
+            if (i1==-1) {
+                alert("Please enter a valid email")
+                return false
+            }
+            const sub=email.substring(i1)
+            console.log(sub)
+            if (sub.indexOf(".")==-1) {
+                alert("Please enter a valid email")
+                return false
+            }
+
+            return true
+        }
+
+        function formatPhoneNumber(){
+            const ph=document.getElementById("ph")
+            let initial=ph.value
+            let numbersOnly=""
+            let formatted=""
+            for(var i=0;i<initial.length;i++) {
+                if (!isNaN(Number(initial[i]))) {
+                    numbersOnly+=initial[i]
+                }
+            }
+            if (numbersOnly.length>=3) {
+                formatted="("+numbersOnly.substring(0,3)+")"
+                if (numbersOnly.length>=6) {
+                    formatted+=numbersOnly.substring(3,6)+"-"
+                    if (numbersOnly.length>6) {
+                        formatted+=numbersOnly.substring(6)
+                    }
+
+                }
+                else {
+                    formatted+=numbersOnly.substring(3)
+                }
+
+            }
+            else {
+                formatted=numbersOnly
+            }
+            ph.value=formatted
+            return initial;
+            
+        }
+    </script>
+</html>
